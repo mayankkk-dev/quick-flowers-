@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA Quick Flowers — Hand-Tied Bouquets & Signature Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FBF3EC;
+    --cream-dark: #F2E6D9;
+    --blush: #EBC0C3;
+    --rose: #B85C6B;
+    --rose-deep: #9A4652;
+    --sage: #93A66C;
+    --sage-dark: #5F7052;
+    --plum: #402839;
+    --plum-soft: #6B5063;
+    --gold: #C9A66B;
+    --white: #FFFEFC;
+    --shadow: 0 12px 32px rgba(64,40,57,0.10);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--cream);
+    color: var(--plum-soft);
+    font-family: 'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    color: var(--plum);
+    line-height:1.1;
+    font-weight:600;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  img,svg{ display:block; max-width:100%; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+  input, select, textarea{ font-family:inherit; font-size:1rem; }
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color: var(--rose-deep);
+    font-weight:600;
+    display:inline-block;
+    margin-bottom:0.9rem;
+  }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 6vw;
+  }
+
+  /* ---------- Botanical flourish (signature element) ---------- */
+  .flourish{ display:block; opacity:0.85; }
+  .flourish path{ fill:none; stroke: var(--sage-dark); stroke-width:1.4; stroke-linecap:round; }
+  .flourish circle{ fill: var(--rose); }
+  .flourish .bloom-alt{ fill: var(--gold); }
+
+  .divider{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 2.4rem 0;
+  }
+  .divider svg{ width:220px; height:34px; }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    background: rgba(251,243,236,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(64,40,57,0.08);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 1.1rem 6vw;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{ display:flex; align-items:center; gap:0.6rem; }
+  .logo-mark{ width:34px; height:34px; }
+  .logo-text{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.35rem;
+    color: var(--plum);
+    letter-spacing:0.01em;
+  }
+  .nav-links{ display:flex; gap:2.4rem; align-items:center; }
+  .nav-links a{
+    font-size:0.86rem;
+    letter-spacing:0.05em;
+    color: var(--plum-soft);
+    text-transform:uppercase;
+    position:relative;
+    padding-bottom:4px;
+    transition: color 0.25s ease;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background: var(--rose); transition: width 0.3s ease;
+  }
+  .nav-links a:hover{ color: var(--rose-deep); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    background: var(--rose);
+    color: var(--white) !important;
+    padding:0.6rem 1.3rem;
+    border-radius:100px;
+    font-size:0.8rem !important;
+    letter-spacing:0.05em;
+  }
+  .nav-cta::after{ display:none; }
+  .nav-cta:hover{ background: var(--rose-deep); color: var(--white) !important; }
+  .menu-toggle{ display:none; flex-direction:column; gap:5px; }
+  .menu-toggle span{ width:24px; height:2px; background: var(--plum); }
+
+  /* ---------- Hero: framed photo with cursor/touch blur-reveal ---------- */
+  .hero-section{
+    padding: 2.6rem 6vw 3.5rem;
+    max-width:1180px; margin:0 auto;
+  }
+  .hero-frame{
+    position:relative;
+    border-radius:30px;
+    overflow:hidden;
+    border: 18px solid var(--white);
+    box-shadow: 0 34px 80px rgba(64,40,57,0.32);
+    min-height: 680px;
+    isolation:isolate;
+    --spot-x:50%; --spot-y:46%; --spot-r:0px;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+         /* ADD YOUR PHOTO HERE */
+     background-image: url('new.jpeg');
+    background-size:cover;
+    background-position:center 30%;
+  }
+  .hero-bg-blur{
+    filter: blur(26px) saturate(1.08);
+    transform: scale(1.12);
+    z-index:1;
+    -webkit-mask-image: radial-gradient(circle var(--spot-r) at var(--spot-x) var(--spot-y), transparent 0%, transparent 58%, black 100%);
+    mask-image: radial-gradient(circle var(--spot-r) at var(--spot-x) var(--spot-y), transparent 0%, transparent 58%, black 100%);
+  }
+  .hero-bg-sharp{ z-index:0; }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:2; pointer-events:none;
+    background: linear-gradient(185deg, rgba(64,40,57,0.12) 0%, rgba(64,40,57,0.18) 40%, rgba(64,40,57,0.72) 100%);
+  }
+  .hero-frame-content{
+    position:relative; z-index:3;
+    min-height:680px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding: 3.4rem 3.6rem 3.2rem;
+    color: var(--white);
+  }
+  .hero-frame-content .eyebrow{ color: var(--blush); }
+  .hero-frame-content h1{
+    font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+    font-style:italic;
+    font-weight:500;
+    color: var(--white);
+    text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+    margin-bottom:0.7rem;
+  }
+  .hero-quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.15rem;
+    color: rgba(255,255,255,0.92);
+    max-width:46ch;
+    margin-bottom:1rem;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.3);
+  }
+  .hero-specs{
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom:1.8rem;
+  }
+  .hero-actions{ display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn{
+    display:inline-block;
+    padding:0.9rem 1.9rem;
+    border-radius:100px;
+    font-size:0.85rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    transition: all 0.25s ease;
+  }
+  .btn-primary{ background: var(--rose); color: var(--white); }
+  .btn-primary:hover{ background: var(--rose-deep); transform:translateY(-2px); box-shadow: var(--shadow); }
+  .btn-outline{ border:1.4px solid var(--white); color: var(--white); }
+  .btn-outline:hover{ background: var(--white); color: var(--plum); }
+  .hero-hint{
+    position:absolute; z-index:3; top:1.6rem; right:1.8rem;
+    font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase;
+    color: rgba(255,255,255,0.75);
+    background: rgba(64,40,57,0.35);
+    padding:0.5rem 0.9rem; border-radius:100px;
+    backdrop-filter: blur(4px);
+    display:flex; align-items:center; gap:0.4rem;
+  }
+
+  .hero-stats{
+    display:flex; gap:2.6rem; flex-wrap:wrap;
+    justify-content:center;
+    margin: 2.4rem auto 0;
+    padding-top:1.8rem;
+    max-width:1180px;
+    border-top:1px solid rgba(64,40,57,0.12);
+  }
+  .hero-stats div{ text-align:center; }
+  .hero-stats div strong{
+    display:block; font-family:'Fraunces',serif; font-size:1.6rem; color:var(--rose-deep);
+  }
+  .hero-stats div span{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--plum-soft); }
+
+  /* ---------- Section heading pattern ---------- */
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 3rem; }
+  .section-head h2{ font-size: clamp(2rem, 3.4vw, 2.7rem); margin-bottom:0.8rem; }
+  .section-head p{ color: var(--plum-soft); font-size:1rem; }
+
+  section{ padding: 4.5rem 0; }
+  .section-alt{ background: var(--cream-dark); }
+
+  /* ---------- Gallery ---------- */
+  .tabs{
+    display:flex; justify-content:center; gap:0.8rem; margin-bottom:3rem; flex-wrap:wrap;
+  }
+  .tab-btn{
+    padding:0.55rem 1.4rem;
+    border-radius:100px;
+    border:1.3px solid rgba(64,40,57,0.18);
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color: var(--plum-soft);
+    transition: all 0.25s ease;
+  }
+  .tab-btn.active, .tab-btn:hover{
+    background: var(--plum); color: var(--white); border-color: var(--plum);
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:1.6rem;
+  }
+  .card{
+    background: var(--white);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow: 0 20px 40px rgba(64,40,57,0.16); }
+  .card:nth-child(3n+1){ grid-row: span 1; }
+  .card-art{
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(160deg, var(--cream-dark), var(--blush) 140%);
+    position:relative;
+    overflow:hidden;
+  }
+  .card-art svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .card-badge{
+    position:absolute; top:12px; left:12px;
+    background: rgba(64,40,57,0.85);
+    color: var(--white);
+    font-size:0.65rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:0.35rem 0.7rem;
+    border-radius:100px;
+    z-index:2;
+  }
+  .card-body{ padding:1.3rem 1.4rem 1.5rem; display:flex; flex-direction:column; gap:0.5rem; flex:1; }
+  .card-body h3{ font-size:1.2rem; font-weight:600; }
+  .card-body p{ font-size:0.88rem; color: var(--plum-soft); flex:1; }
+  .card-footer{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:0.5rem;
+  }
+  .price{ font-family:'Fraunces',serif; font-weight:600; color: var(--rose-deep); font-size:1.15rem; }
+  .order-btn{
+    font-size:0.75rem; letter-spacing:0.05em; text-transform:uppercase;
+    color: var(--sage-dark); border-bottom:1px solid var(--sage-dark); padding-bottom:2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .order-btn:hover{ color: var(--rose-deep); border-color: var(--rose-deep); }
+
+  /* ---------- Story / About ---------- */
+  .about{
+    display:grid; grid-template-columns: 0.9fr 1.1fr; gap:3.5rem; align-items:center;
+  }
+  .about-art svg{ width:100%; }
+  .about-copy p{ margin-bottom:1.1rem; color: var(--plum-soft); }
+  .about-copy p:last-of-type{ margin-bottom:1.6rem; }
+
+  /* ---------- Forms ---------- */
+  .form-wrap{
+    background: var(--white);
+    border-radius:24px;
+    box-shadow: var(--shadow);
+    padding: 3rem;
+    max-width:760px;
+    margin:0 auto;
+    position:relative;
+  }
+  .form-wrap::before{
+    content:'';
+    position:absolute; inset:14px;
+    border:1.3px dashed rgba(184,92,107,0.35);
+    border-radius:16px;
+    pointer-events:none;
+  }
+  .form-grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap:1.3rem 1.5rem;
+    position:relative; z-index:1;
+  }
+  .form-grid .full{ grid-column: 1 / -1; }
+  .field label{
+    display:block; font-size:0.76rem; letter-spacing:0.06em; text-transform:uppercase;
+    color: var(--plum-soft); margin-bottom:0.5rem;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;
+    padding:0.75rem 0.95rem;
+    border:1.3px solid rgba(64,40,57,0.18);
+    border-radius:10px;
+    background: var(--cream);
+    color: var(--plum);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color: var(--rose); background: var(--white);
+  }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .checkbox-row{ display:flex; align-items:center; gap:0.6rem; }
+  .checkbox-row input{ width:auto; accent-color: var(--rose); }
+  .checkbox-row label{ margin:0; font-size:0.85rem; text-transform:none; letter-spacing:0; color:var(--plum-soft); }
+  .submit-btn{
+    margin-top:1.6rem;
+    width:100%;
+    background: var(--plum);
+    color: var(--white);
+    padding:1rem;
+    border-radius:12px;
+    font-size:0.85rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+  .submit-btn:hover{ background: var(--rose-deep); transform:translateY(-2px); }
+  .confirm-msg{
+    display:none;
+    margin-top:1.2rem;
+    padding:0.9rem 1.1rem;
+    background: rgba(147,166,108,0.16);
+    border:1px solid var(--sage);
+    border-radius:10px;
+    color: var(--sage-dark);
+    font-size:0.9rem;
+    text-align:center;
+  }
+  .confirm-msg.show{ display:block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:translateY(0);} }
+
+  .two-forms{ display:grid; grid-template-columns:1fr; gap:4.5rem; }
+
+  /* ---------- Contact / Footer ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns: 1fr 1fr 1fr; gap:2.5rem;
+    text-align:center;
+  }
+  .contact-grid h3{ font-size:1.1rem; margin-bottom:0.6rem; }
+  .contact-grid p{ color: var(--plum-soft); font-size:0.92rem; }
+  .contact-icon{ width:34px; height:34px; margin:0 auto 0.9rem; }
+
+  footer{
+    background: var(--plum);
+    color: rgba(251,243,236,0.75);
+    padding: 3rem 6vw 2rem;
+    text-align:center;
+  }
+  footer .logo-text{ color: var(--cream); }
+  footer .flourish path{ stroke: var(--gold); }
+  footer .flourish circle{ fill: var(--blush); }
+  .social-row{ display:flex; justify-content:center; gap:1.2rem; margin:1.4rem 0; }
+  .social-row a{
+    width:36px; height:36px; border-radius:50%;
+    border:1px solid rgba(251,243,236,0.3);
+    display:flex; align-items:center; justify-content:center;
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .social-row a:hover{ background: var(--rose); border-color: var(--rose); }
+  .social-row svg{ width:16px; height:16px; }
+  .copyright{ font-size:0.8rem; margin-top:1.5rem; color: rgba(251,243,236,0.5); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px){
+    .hero-frame{ min-height:520px; border-width:10px; }
+    .hero-frame-content{ min-height:520px; padding:2.2rem 1.6rem 2rem; }
+    .hero-stats{ justify-content:center; gap:1.8rem; }
+    .about{ grid-template-columns:1fr; }
+    .about-art{ max-width:320px; margin:0 auto; }
+    .gallery{ grid-template-columns: repeat(2, 1fr); }
+    .contact-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 720px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0;
+      background: var(--cream); flex-direction:column;
+      padding:1.5rem 0; gap:1.4rem;
+      transform: translateY(-150%); opacity:0;
+      transition: all 0.3s ease;
+      border-bottom:1px solid rgba(64,40,57,0.08);
+    }
+    .nav-links.open{ transform: translateY(0); opacity:1; }
+    .menu-toggle{ display:flex; }
+    .form-grid{ grid-template-columns:1fr; }
+    .form-wrap{ padding:2rem 1.4rem; }
+  }
+  @media (max-width: 520px){
+    .gallery{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="14" r="5" fill="#B85C6B"/>
+        <circle cx="13" cy="20" r="5" fill="#EBC0C3"/>
+        <circle cx="27" cy="20" r="5" fill="#EBC0C3"/>
+        <circle cx="20" cy="24" r="5" fill="#C9A66B"/>
+        <path d="M20 27 L20 37" stroke="#5F7052" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M20 32 Q24 32 25 29" stroke="#5F7052" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">LA Quick Flowers</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#gallery">Bouquets</a></li>
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#preorder">Pre-Order</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#order" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO: framed photo, blurred until touched/hovered ============ -->
+<header class="hero-section" id="home">
+  <div class="hero-frame" id="heroFrame">
+    <div class="hero-bg hero-bg-sharp"></div>
+    <div class="hero-bg hero-bg-blur" id="heroBlurLayer"></div>
+    <div class="hero-overlay"></div>
+    <span class="hero-hint" id="heroHint">✦ move or touch the photo</span>
+    <div class="hero-frame-content">
+      <span class="eyebrow">Est. in Los Angeles</span>
+      <h1>LA Quick Flowers</h1>
+      <p class="hero-quote">“Flowers, gathered with intention — hand-tied the same day they're ordered.”</p>
+      <p class="hero-specs">Hand-Tied &nbsp;·&nbsp; Fresh Cut Daily &nbsp;·&nbsp; Same-Day Local Delivery</p>
+      <div class="hero-actions">
+        <a href="#gallery" class="btn btn-primary">Browse Bouquets</a>
+        <a href="#preorder" class="btn btn-outline">Reserve a Design</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div><strong>500+</strong><span>Bouquets Tied</span></div>
+    <div><strong>40+</strong><span>Signature Designs</span></div>
+    <div><strong>Same-Day</strong><span>Local Delivery</span></div>
+  </div>
+</header>
+
+<div class="divider">
+  <svg class="flourish" viewBox="0 0 220 34">
+    <path d="M0 17 C50 5, 90 30, 130 15 S190 5, 220 17"/>
+    <circle cx="60" cy="12" r="4"/>
+    <circle cx="150" cy="21" r="3" class="bloom-alt"/>
+    <circle cx="110" cy="18" r="2.5"/>
+  </svg>
+</div>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Collection</span>
+      <h2>Bouquets &amp; Masterpieces</h2>
+      <p>Everyday arrangements ready for pickup, and signature masterpieces designed as statement pieces. Every listing shown is currently available in-store.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-filter="all">All Designs</button>
+      <button class="tab-btn" data-filter="bouquet">Everyday Bouquets</button>
+      <button class="tab-btn" data-filter="masterpiece">Signature Masterpieces</button>
+    </div>
+
+    <div class="gallery" id="gallery-grid">
+      <!-- Card 1 -->
+      <article class="card" data-category="bouquet" data-name="Sage &amp; Ivory">
+ <div class="card-art"> 
+<!-- TYPE YOUR PHOTO NAME HERE -->
+ <img src="flowe4.jpg" alt="Morning Blush">
+ </div> <div class="card-body">
+ <h3>Morning Blush</h3> 
+<p>Garden roses and blush peonies, hand-tied with trailing eucalyptus</p> 
+<div class="card-footer">
+ <span class="price">$52</span>
+ <button class="order-btn" onclick="selectForOrder('Morning Blush')"> Order Now → </button> </div> 
+</div> 
+</article>
+
+      <!-- Card 2 -->
+      <article class="card" data-category="bouquet" data-name="Sage &amp; Ivory">
+        <div class="card-art">
+          <!-- TYPE YOUR PHOTO NAME HERE -->
+ <img src="flower2.jpg" alt="Sage &amp; Ivory">
+        </div>
+        <div class="card-body">
+          <h3>Sage &amp; Ivory</h3>
+          <p>White ranunculus and eucalyptus, a soft neutral statement piece.</p>
+          <div class="card-footer">
+            <span class="price">$52</span>
+            <button class="order-btn" onclick="selectForOrder('Sage &amp; Ivory')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Masterpiece -->
+      <article class="card" data-category="masterpiece" data-name="Golden Hour">
+        <div class="card-art">
+          <span class="card-badge">Masterpiece</span>
+          <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#F2E6D9"/>
+            <circle cx="100" cy="80" r="30" fill="#C9A66B"/><circle cx="100" cy="80" r="13" fill="#9A4652"/>
+            <circle cx="60" cy="110" r="20" fill="#B85C6B"/>
+            <circle cx="140" cy="110" r="22" fill="#9A4652"/>
+            <circle cx="100" cy="130" r="18" fill="#EBC0C3"/>
+            <path d="M35 165 C35 145 165 145 165 165 L152 195 L48 195 Z" fill="#9A4652" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Golden Hour</h3>
+          <p>Dahlias and marigold in warm copper tones — a signature one-of-one.</p>
+          <div class="card-footer">
+            <span class="price">$120</span>
+            <button class="order-btn" onclick="selectForOrder('Golden Hour')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="card" data-category="bouquet" data-name="Whispering Meadow">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#93A66C" opacity="0.18"/>
+            <circle cx="75" cy="95" r="18" fill="#EBC0C3"/>
+            <circle cx="110" cy="80" r="16" fill="#C9A66B"/>
+            <circle cx="130" cy="115" r="18" fill="#B85C6B"/>
+            <circle cx="95" cy="125" r="14" fill="#93A66C"/>
+            <circle cx="60" cy="125" r="12" fill="#FBF3EC"/>
+            <path d="M45 160 C45 145 155 145 155 160 L145 188 L55 188 Z" fill="#C9A66B" opacity="0.45"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Whispering Meadow</h3>
+          <p>A loose wildflower mix that feels freshly picked from the field.</p>
+          <div class="card-footer">
+            <span class="price">$38</span>
+            <button class="order-btn" onclick="selectForOrder('Whispering Meadow')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5: Masterpiece -->
+      <article class="card" data-category="masterpiece" data-name="Velvet Plum">
+        <div class="card-art">
+          <span class="card-badge">Masterpiece</span>
+          <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#402839" opacity="0.08"/>
+            <circle cx="95" cy="85" r="28" fill="#9A4652"/><circle cx="95" cy="85" r="12" fill="#402839"/>
+            <circle cx="130" cy="115" r="20" fill="#B85C6B"/>
+            <circle cx="65" cy="120" r="18" fill="#402839" opacity="0.6"/>
+            <circle cx="100" cy="135" r="16" fill="#93A66C" opacity="0.7"/>
+            <path d="M40 165 C40 148 160 148 160 165 L148 195 L52 195 Z" fill="#402839" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Velvet Plum</h3>
+          <p>Deep burgundy roses and plum astilbe, dramatic and richly layered.</p>
+          <div class="card-footer">
+            <span class="price">$135</span>
+            <button class="order-btn" onclick="selectForOrder('Velvet Plum')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="card" data-category="bouquet" data-name="Cotton &amp; Cream">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#FBF3EC"/>
+            <circle cx="85" cy="90" r="26" fill="#FFFEFC" stroke="#EBC0C3" stroke-width="2"/>
+            <circle cx="120" cy="105" r="22" fill="#FFFEFC" stroke="#EBC0C3" stroke-width="2"/>
+            <circle cx="60" cy="115" r="10" fill="#93A66C" opacity="0.5"/>
+            <circle cx="140" cy="130" r="8" fill="#93A66C" opacity="0.5"/>
+            <path d="M45 160 C45 145 155 145 155 160 L145 190 L55 190 Z" fill="#EBC0C3" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Cotton &amp; Cream</h3>
+          <p>Cloud-like hydrangea and baby's breath in soft, airy layers.</p>
+          <div class="card-footer">
+            <span class="price">$48</span>
+            <button class="order-btn" onclick="selectForOrder('Cotton &amp; Cream')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 7: Masterpiece -->
+      <article class="card" data-category="masterpiece" data-name="Terracotta Dream">
+        <div class="card-art">
+          <span class="card-badge">Masterpiece</span>
+          <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#C9A66B" opacity="0.18"/>
+            <circle cx="90" cy="90" r="24" fill="#C9A66B"/>
+            <circle cx="130" cy="110" r="22" fill="#9A4652" opacity="0.85"/>
+            <circle cx="65" cy="120" r="16" fill="#B85C6B"/>
+            <path d="M150 70 L155 100 M158 65 L165 95 M142 68 L146 98" stroke="#93A66C" stroke-width="2" stroke-linecap="round"/>
+            <path d="M40 162 C40 146 160 146 160 162 L148 192 L52 192 Z" fill="#9A4652" opacity="0.35"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Terracotta Dream</h3>
+          <p>Dried pampas and rust-toned blooms — an everlasting statement design.</p>
+          <div class="card-footer">
+            <span class="price">$110</span>
+            <button class="order-btn" onclick="selectForOrder('Terracotta Dream')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 8 -->
+      <article class="card" data-category="bouquet" data-name="First Light">
+        <div class="card-art">
+          <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#EBC0C3" opacity="0.3"/>
+            <circle cx="80" cy="95" r="20" fill="#EBC0C3"/>
+            <circle cx="115" cy="80" r="18" fill="#B85C6B" opacity="0.85"/>
+            <circle cx="130" cy="120" r="18" fill="#EBC0C3"/>
+            <circle cx="90" cy="130" r="14" fill="#93A66C" opacity="0.5"/>
+            <path d="M48 162 C48 147 152 147 152 162 L142 190 L58 190 Z" fill="#B85C6B" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>First Light</h3>
+          <p>Soft pink tulips and lisianthus, delicate and effortlessly romantic.</p>
+          <div class="card-footer">
+            <span class="price">$42</span>
+            <button class="order-btn" onclick="selectForOrder('First Light')">Order Now →</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg class="flourish" viewBox="0 0 220 34">
+    <path d="M0 17 C50 30, 90 5, 130 20 S190 30, 220 17"/>
+    <circle cx="45" cy="22" r="3"/>
+    <circle cx="130" cy="20" r="4" class="bloom-alt"/>
+    <circle cx="180" cy="13" r="2.5"/>
+  </svg>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section-alt">
+  <div class="container about">
+    <div class="about-art">
+      <svg viewBox="0 0 300 340" fill="none">
+        <path d="M150 320 C150 260 145 220 150 180" stroke="#5F7052" stroke-width="3" stroke-linecap="round"/>
+        <ellipse cx="150" cy="150" rx="90" ry="60" fill="#F2E6D9"/>
+        <circle cx="115" cy="130" r="24" fill="#EBC0C3"/>
+        <circle cx="160" cy="115" r="28" fill="#B85C6B"/>
+        <circle cx="190" cy="150" r="20" fill="#C9A66B"/>
+        <circle cx="130" cy="165" r="18" fill="#93A66C" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow">Our Story</span>
+      <h2>A neighborhood shop, tied by hand.</h2>
+      <p>LA Quick Flowers started as a single flower stand and grew into a full studio because of one idea: bouquets should feel personal, not mass-produced. Every arrangement leaving our shop is hand-tied the same day it's ordered.</p>
+      <p>Alongside our everyday bouquets, our lead designer creates a rotating set of signature masterpieces — small-batch, statement arrangements you won't find anywhere else in the city.</p>
+      <a href="#gallery" class="btn btn-outline">See the Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRE-ORDER ============ -->
+<section id="preorder">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Planning Ahead</span>
+      <h2>Reserve a Bouquet or Masterpiece</h2>
+      <p>Designing for a wedding, event, or a date further out? Reserve your bouquet in advance and we'll have it ready exactly when you need it.</p>
+    </div>
+
+    <form class="form-wrap" id="preorderForm">
+      <div class="form-grid">
+        <div class="field full">
+          <label for="po-design">Design or style</label>
+          <select id="po-design" required>
+            <option value="">Select a bouquet or masterpiece</option>
+            <option>Morning Blush</option>
+            <option>Sage &amp; Ivory</option>
+            <option>Golden Hour (Masterpiece)</option>
+            <option>Whispering Meadow</option>
+            <option>Velvet Plum (Masterpiece)</option>
+            <option>Cotton &amp; Cream</option>
+            <option>Terracotta Dream (Masterpiece)</option>
+            <option>First Light</option>
+            <option>Custom design — describe below</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="po-occasion">Occasion</label>
+          <input type="text" id="po-occasion" placeholder="Wedding, birthday, event…">
+        </div>
+        <div class="field">
+          <label for="po-date">Needed by</label>
+          <input type="date" id="po-date" required>
+        </div>
+        <div class="field">
+          <label for="po-name">Your name</label>
+          <input type="text" id="po-name" required>
+        </div>
+        <div class="field">
+          <label for="po-contact">Phone or email</label>
+          <input type="text" id="po-contact" required>
+        </div>
+        <div class="field full">
+          <label for="po-notes">Colors, theme, or special notes</label>
+          <textarea id="po-notes" placeholder="Tell us about the palette, size, or inspiration…"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Reserve My Bouquet</button>
+      <div class="confirm-msg" id="po-confirm">Thank you — your reservation request has been received. We'll confirm details with you shortly.</div>
+    </form>
+  </div>
+</section>
+
+<div class="divider">
+  <svg class="flourish" viewBox="0 0 220 34">
+    <path d="M0 17 C50 5, 90 30, 130 15 S190 5, 220 17"/>
+    <circle cx="60" cy="12" r="4"/>
+    <circle cx="150" cy="21" r="3" class="bloom-alt"/>
+    <circle cx="110" cy="18" r="2.5"/>
+  </svg>
+</div>
+
+<!-- ============ QUICK ORDER ============ -->
+<section id="order" class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Same-Day Ready</span>
+      <h2>Order a Bouquet Today</h2>
+      <p>Choose from what's currently available in-store, and we'll have it ready for pickup or local delivery.</p>
+    </div>
+
+    <form class="form-wrap" id="orderForm">
+      <div class="form-grid">
+        <div class="field full">
+          <label for="o-bouquet">Choose your bouquet</label>
+          <select id="o-bouquet" required>
+            <option value="">Select an available design</option>
+            <option>Morning Blush — $45</option>
+            <option>Sage &amp; Ivory — $52</option>
+            <option>Golden Hour (Masterpiece) — $120</option>
+            <option>Whispering Meadow — $38</option>
+            <option>Velvet Plum (Masterpiece) — $135</option>
+            <option>Cotton &amp; Cream — $48</option>
+            <option>Terracotta Dream (Masterpiece) — $110</option>
+            <option>First Light — $42</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="o-qty">Quantity</label>
+          <input type="number" id="o-qty" min="1" value="1" required>
+        </div>
+        <div class="field">
+          <label for="o-fulfillment">Pickup or delivery</label>
+          <select id="o-fulfillment">
+            <option>In-store pickup</option>
+            <option>Local delivery</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="o-name">Your name</label>
+          <input type="text" id="o-name" required>
+        </div>
+        <div class="field">
+          <label for="o-contact">Phone or email</label>
+          <input type="text" id="o-contact" required>
+        </div>
+        <div class="field full">
+          <label for="o-address">Delivery address (if applicable)</label>
+          <input type="text" id="o-address" placeholder="Leave blank for pickup">
+        </div>
+        <div class="field full checkbox-row">
+          <input type="checkbox" id="o-card" onchange="document.getElementById('cardMsgField').style.display = this.checked ? 'block' : 'none'">
+          <label for="o-card">Add a message card</label>
+        </div>
+        <div class="field full" id="cardMsgField" style="display:none;">
+          <label for="o-message">Message card text</label>
+          <textarea id="o-message" placeholder="Write your message…"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Place Order</button>
+      <div class="confirm-msg" id="o-confirm">Thank you — your order has been received. We'll reach out to confirm and arrange payment.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Visit or Reach Us</span>
+      <h2>Say Hello</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <svg class="contact-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4C13 4 8 9.5 8 16c0 9 12 20 12 20s12-11 12-20c0-6.5-5-12-12-12z" stroke="#B85C6B" stroke-width="1.6"/><circle cx="20" cy="16" r="4.5" stroke="#5F7052" stroke-width="1.6"/></svg>
+        <h3>Studio Location</h3>
+        <p>123 Blossom Lane<br>Los Angeles, CA</p>
+      </div>
+      <div>
+        <svg class="contact-icon" viewBox="0 0 40 40" fill="none"><path d="M10 8h6l3 8-4 3c2 4 5 7 9 9l3-4 8 3v6c0 2-2 3-4 3C18 36 4 22 4 9c0-2 1-4 3-4z" stroke="#B85C6B" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Call or Text</h3>
+        <p>(213) 555-0142<br>Mon–Sat, 9am–6pm</p>
+      </div>
+      <div>
+        <svg class="contact-icon" viewBox="0 0 40 40" fill="none"><rect x="5" y="9" width="30" height="22" rx="3" stroke="#B85C6B" stroke-width="1.6"/><path d="M6 11l14 11 14-11" stroke="#5F7052" stroke-width="1.6" fill="none"/></svg>
+        <h3>Email</h3>
+        <p>hello@laquickflowers.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <span class="logo-text">LA Quick Flowers</span>
+  <div class="divider">
+    <svg class="flourish" viewBox="0 0 220 34">
+      <path d="M0 17 C50 30, 90 5, 130 20 S190 30, 220 17"/>
+      <circle cx="45" cy="22" r="3"/>
+      <circle cx="130" cy="20" r="4" class="bloom-alt"/>
+      <circle cx="180" cy="13" r="2.5"/>
+    </svg>
+  </div>
+  <div class="social-row">
+    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h-2a2 2 0 00-2 2v10M9 13h6"/><circle cx="12" cy="12" r="9"/></svg></a>
+    <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 17c1-3 1.5-5 1.5-5s-.5-1-.5-2.5c0-1.5 1-2.5 2-2.5 1 0 1.5.7 1.5 1.6 0 1-.6 2.4-1 3.7-.3 1 .5 1.9 1.6 1.9 1.9 0 3.2-2.4 3.2-5.2 0-2.2-1.6-3.9-4.4-3.9-3.2 0-5.2 2.4-5.2 5 0 .9.3 1.6.7 2.1"/></svg></a>
+  </div>
+  <p class="copyright">© 2026 LA Quick Flowers. Hand-tied with care.</p>
+</footer>
+
+
+
+<script>
+  // Mobile nav toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  /* ============================================================
+     HERO PHOTO — blurred by default; moving the cursor (or a
+     finger on touch) clears a soft spotlight over the real photo.
+  ============================================================ */
+  (function heroReveal(){
+    const frame = document.getElementById('heroFrame');
+    const hint = document.getElementById('heroHint');
+    if (!frame) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      // Show the photo clearly without motion for users who prefer reduced motion
+      frame.style.setProperty('--spot-r', '1200px');
+      if (hint) hint.style.display = 'none';
+      return;
+    }
+
+    let current = { x: 50, y: 46, r: 0 };
+    let target  = { x: 50, y: 46, r: 0 };
+    let hintFaded = false;
+
+    function applySpot(){
+      frame.style.setProperty('--spot-x', current.x + '%');
+      frame.style.setProperty('--spot-y', current.y + '%');
+      frame.style.setProperty('--spot-r', current.r + 'px');
+    }
+
+    function loop(){
+      current.x += (target.x - current.x) * 0.14;
+      current.y += (target.y - current.y) * 0.14;
+      current.r += (target.r - current.r) * 0.10;
+      applySpot();
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    function pointFromEvent(clientX, clientY){
+      const rect = frame.getBoundingClientRect();
+      return {
+        x: ((clientX - rect.left) / rect.width) * 100,
+        y: ((clientY - rect.top) / rect.height) * 100
+      };
+    }
+
+    function fadeHint(){
+      if (hint && !hintFaded) { hint.style.opacity = '0'; hintFaded = true; }
+    }
+
+    frame.addEventListener('mousemove', (e) => {
+      const p = pointFromEvent(e.clientX, e.clientY);
+      target = { x: p.x, y: p.y, r: 260 };
+      fadeHint();
+    });
+    frame.addEventListener('mouseleave', () => { target.r = 0; });
+
+    frame.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      const p = pointFromEvent(t.clientX, t.clientY);
+      target = { x: p.x, y: p.y, r: 230 };
+      fadeHint();
+    }, { passive: true });
+    frame.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      if (!t) return;
+      const p = pointFromEvent(t.clientX, t.clientY);
+      target = { x: p.x, y: p.y, r: 230 };
+      fadeHint();
+    }, { passive: true });
+    frame.addEventListener('touchend', () => { target.r = 0; });
+
+    // One-time gentle intro so first-time visitors notice the effect
+    window.addEventListener('load', () => {
+      setTimeout(() => { target = { x: 50, y: 44, r: 240 }; }, 500);
+      setTimeout(() => { target.r = 0; }, 2200);
+    });
+  })();
+
+  // Gallery filter tabs
+  const tabs = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('#gallery-grid .card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // "Order Now" on a card scrolls to Quick Order and pre-selects the bouquet
+  function selectForOrder(name){
+    const select = document.getElementById('o-bouquet');
+    for (const opt of select.options){
+      if (opt.value.startsWith(name)) { select.value = opt.value; break; }
+    }
+    document.getElementById('order').scrollIntoView({ behavior:'smooth' });
+  }
+
+  // Form submissions (no backend yet — shows confirmation and resets)
+  document.getElementById('preorderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('po-confirm').classList.add('show');
+    this.reset();
+    setTimeout(() => document.getElementById('po-confirm').classList.remove('show'), 6000);
+  });
+
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('o-confirm').classList.add('show');
+    this.reset();
+    document.getElementById('cardMsgField').style.display = 'none';
+    setTimeout(() => document.getElementById('o-confirm').classList.remove('show'), 6000);
+  });
+
+</script>
+
+</body>
+</html>
